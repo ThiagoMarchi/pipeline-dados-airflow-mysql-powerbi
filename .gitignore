@@ -1,0 +1,20 @@
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pasta de ambiente virtual (se houver)
+.venv/
+venv/
+env/
+
+# Logs do Airflow
+logs/
+
+# Arquivos de ambiente com senhas
+.env
+
+# Arquivos de IDE
+.vscode/
+.idea/

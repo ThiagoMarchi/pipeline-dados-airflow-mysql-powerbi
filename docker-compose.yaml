@@ -1,0 +1,68 @@
+# docker-compose.yaml - VERSÃO FINAL SIMPLIFICADA
+version: '3.8'
+
+x-airflow-common: &airflow-common
+  build: .
+  environment:
+    &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: mysql+mysqlconnector://airflow_user:airflow_pass@mysql_db:3306/airflow_db
+    AIRFLOW__CELERY__RESULT_BACKEND: db+mysql://airflow_user:airflow_pass@mysql_db:3306/airflow_db
+    AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/1
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+  depends_on:
+    - mysql_db
+    - redis
+
+services:
+  # Um único banco de dados para tudo
+  mysql_db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=airflow_db      # Banco para os metadados do Airflow
+      - MYSQL_USER=airflow_user
+      - MYSQL_PASSWORD=airflow_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_volume:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: redis_airflow
+    ports:
+      - "6379:6379"
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    restart: always
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
+
+  airflow-worker:
+    <<: *airflow-common
+    command: celery worker
+    restart: always
+
+  airflow-init:
+    <<: *airflow-common
+    command:
+      - bash
+      - -c
+      - |
+        airflow db init && \
+        airflow users create --role Admin --username admin --email admin@example.com --firstname Admin --lastname User --password admin
+
+volumes:
+  mysql_volume:
