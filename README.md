@@ -81,20 +81,22 @@ Siga os passos abaixo para recriar e executar este ambiente.
     ```
 
 2.  **Ajustar Permissões de Pastas**
+
 O Airflow no Docker precisa de permissões de escrita nas pastas de logs e plugins.
     ```bash
     sudo mkdir -p ./logs ./plugins
     sudo chown -R 50000:0 ./logs ./plugins
     ```
 
-4.  **Construir e Iniciar os Contêineres**
+3.  **Construir e Iniciar os Contêineres**
+
 Este comando irá construir a imagem customizada do Airflow (com `Faker` instalado) e iniciar todos os serviços (Airflow, MySQL, Redis).
     ```bash
     docker-compose up -d --build
     ```
     Aguarde alguns minutos para que todos os serviços estejam no ar.
 
-6.  **Configurar a Conexão no Airflow**
+4.  **Configurar a Conexão no Airflow**
     * Acesse a interface do Airflow em `http://localhost:8080` (login: `admin`, senha: `admin`).
     * Vá em **Admin -> Connections** e crie a conexão para o banco de dados da aplicação:
         * **Connection Id:** `mysql_default`
@@ -106,7 +108,7 @@ Este comando irá construir a imagem customizada do Airflow (com `Faker` instala
         * **Port:** `3306`
     * Teste e salve a conexão.
    
-7.  **Executar as DAGs**
+5.  **Executar as DAGs**
     * Na interface do Airflow, ative e execute as DAGs na seguinte ordem para construir o Data Mart:
         1. `build_dim_date` (Roda uma vez para criar e popular a tabela de calendário)
         2.  `build_dim_dealers_fictitious` (Roda uma vez para criar as concessionárias)
