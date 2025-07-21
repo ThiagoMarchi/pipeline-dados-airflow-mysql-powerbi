@@ -3,7 +3,7 @@
 ## 📄 Resumo
 Este projeto demonstra a construção de um pipeline de dados completo (ELT - Extract, Load, Transform) utilizando ferramentas modernas de engenharia de dados. O pipeline extrai dados de veículos de uma API pública, os processa, armazena em um banco de dados MySQL e, finalmente, gera um conjunto de dados modelado e pronto para análise em ferramentas de Business Intelligence como o Power BI.
 
-O projeto foi totalmente containerizado com Docker e orquestrado com Apache Airflow.
+O projeto foi totalmente containerizado com Docker e orquestrado com Apache Airflow, seguindo uma arquitetura modular com DAGs especializadas para cada etapa do processo.
 
 ---
 
@@ -37,16 +37,14 @@ O fluxo de dados segue a seguinte arquitetura:
 /meu_novo_pipeline
 |
 ├── dags/                  # Contém os arquivos .py das DAGs do Airflow
-│   ├── dag_build_dim_models.py
+│   ├── dag_build_dim_date.py
 │   ├── dag_build_dim_dealers_fictitious.py
+│   ├── dag_build_dim_models.py
 │   └── dag_build_fact_sales.py
 |
 ├── logs/                  # Logs gerados pelo Airflow (ignorado pelo .gitignore)
 |
 ├── plugins/               # Para plugins customizados do Airflow (vazio neste projeto)
-|
-├── scripts/               # Scripts auxiliares, como o de popular a dim_date
-│   └── populate_dim_date.py
 |
 ├── .gitignore             # Arquivo que especifica o que o Git deve ignorar
 ├── docker-compose.yaml    # Arquivo principal que define e orquestra todos os serviços
@@ -69,7 +67,7 @@ Siga os passos abaixo para recriar e executar este ambiente.
 
 1.  **Clonar o Repositório**
     ```bash
-    git clone [https://github.com/seu-usuario/pipeline-dados-airflow-mysql-powerbi.git](https://github.com/seu-usuario/pipeline-dados-airflow-mysql-powerbi.git)
+    git clone https://github.com/ThiagoMarchi/pipeline-dados-airflow-mysql-powerbi
     cd pipeline-dados-airflow-mysql-powerbi
     ```
 
@@ -98,22 +96,13 @@ Siga os passos abaixo para recriar e executar este ambiente.
         * **Password:** `mysql_pass`
         * **Port:** `3306`
     * Teste e salve a conexão.
-
-5.  **Popular a Tabela de Datas**
-    O pipeline depende de uma tabela de calendário (`dim_date`). Execute o script Python para populá-la uma única vez.
-    ```bash
-    # Instale as dependências no seu ambiente WSL primeiro
-    python3 -m pip install pandas sqlalchemy mysql-connector-python
-
-    # Execute o script
-    python3 scripts/populate_dim_date.py
-    ```
-    
-6.  **Executar as DAGs**
-    * Na interface do Airflow, ative e execute as DAGs na seguinte ordem:
-        1.  `build_dim_dealers_fictitious`
-        2.  `build_dim_models`
-        3.  `build_fact_sales` (ela esperará as outras duas terminarem)
+   
+5.  **Executar as DAGs**
+    * Na interface do Airflow, ative e execute as DAGs na seguinte ordem para construir o Data Mart:
+        1. `build_dim_date` (Roda uma vez para criar e popular a tabela de calendário)
+        2.  `build_dim_dealers_fictitious` (Roda uma vez para criar as concessionárias)
+        3.  `build_dim_models` (Pode ser rodada periodicamente para atualizar os modelos)
+        4.  `build_fact_sales` (Roda por último, pois depende das outras. Pode ser rodada diariamente)
 
 ---
 
@@ -128,7 +117,7 @@ Com o Data Mart populado, conecte o Power BI ao banco de dados `dados_api` (Host
 
 ## 👨‍💻 Autor
 
-**[Seu Nome]**
+**Thiago Marchi de Morais**
 
-* [LinkedIn](URL_DO_SEU_LINKEDIN)
-* [GitHub](URL_DO_SEU_GITHUB)
+* [LinkedIn](https://www.linkedin.com/in/thiago-marchi/)
+* [GitHub](https://github.com/ThiagoMarchi)
