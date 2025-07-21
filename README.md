@@ -1,9 +1,16 @@
 # Projeto de Pipeline de Dados com Airflow, Docker e MySQL
 
 ## 📄 Resumo
+
 Este projeto demonstra a construção de um pipeline de dados completo (ELT - Extract, Load, Transform) utilizando ferramentas modernas de engenharia de dados. O pipeline extrai dados de veículos de uma API pública, os processa, armazena em um banco de dados MySQL e, finalmente, gera um conjunto de dados modelado e pronto para análise em ferramentas de Business Intelligence como o Power BI.
 
 O projeto foi totalmente containerizado com Docker e orquestrado com Apache Airflow, seguindo uma arquitetura modular com DAGs especializadas para cada etapa do processo.
+
+---
+
+## 📄 Dashboard Final
+
+O resultado final do pipeline é um dashboard interativo no Power BI que permite a análise de vendas de veículos por diversas dimensões.
 
 ---
 
@@ -108,10 +115,13 @@ Siga os passos abaixo para recriar e executar este ambiente.
 
 ## 📊 Análises no Power BI
 
-Com o Data Mart populado, conecte o Power BI ao banco de dados `dados_api` (Host: `localhost`, Porta: `3306`, Usuário: `mysql_user`) para criar um dashboard interativo e responder perguntas como:
-* Qual o faturamento total por marca e segmento?
-* Como as vendas de veículos elétricos evoluíram ao longo dos anos?
-* Qual o preço médio de venda para carros de luxo vs. carros de entrada?
+Com o Data Mart populado, conecte o Power BI ao banco de dados `dados_api` (Host: `localhost`, Porta: `3306`, Usuário: `mysql_user`) para criar um dashboard interativo e responder perguntas de negócio como:
+* KPIs: Qual o Faturamento Total, Total de Carros Vendidos e o Preço Médio por Venda no período selecionado?
+* Performance de Produto: Qual o faturamento por marca, e como ele se divide entre os segmentos (Luxo, Esportivo, Geral)?
+* Tendência Temporal: Qual a tendência de faturamento ao longo dos anos?
+* Análise Geográfica: Qual a distribuição do faturamento total por estado?
+* Comparativo de Mercado: Qual a participação de carros a combustão vs. elétricos no faturamento total?
+* Volume de Vendas: Quais marcas vendem mais em volume de unidades?
 
 ---
 
