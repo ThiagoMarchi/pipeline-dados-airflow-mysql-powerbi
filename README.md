@@ -94,7 +94,7 @@ Este comando irá construir a imagem customizada do Airflow (com `Faker` instala
 ```bash
     docker-compose up -d --build
 ```
-    Aguarde alguns minutos para que todos os serviços estejam no ar.
+Aguarde alguns minutos para que todos os serviços estejam no ar.
 
 4.  **Configurar a Conexão no Airflow**
     * Acesse a interface do Airflow em `http://localhost:8080` (login: `admin`, senha: `admin`).
