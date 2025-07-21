@@ -12,7 +12,7 @@ O projeto foi totalmente containerizado com Docker e orquestrado com Apache Airf
 
 O resultado final do pipeline é um dashboard interativo no Power BI que permite a análise de vendas de veículos por diversas dimensões.
 
-![Dashboard Screenshot](https://github.com/ThiagoMarchi/pipeline-dados-airflow-mysql-powerbi/blob/main/dashboard.png)
+![Dashboard Screenshot](https://github.com/ThiagoMarchi/pipeline_airflow_mysql_powerbi/blob/main/dashboard.png)
 
 ---
 
@@ -76,7 +76,7 @@ Siga os passos abaixo para recriar e executar este ambiente.
 
 1.  **Clonar o Repositório**
     ```bash
-    git clone https://github.com/ThiagoMarchi/pipeline-dados-airflow-mysql-powerbi
+    git clone https://github.com/ThiagoMarchi/pipeline_airflow_mysql_powerbi
     cd pipeline-dados-airflow-mysql-powerbi
     ```
 
