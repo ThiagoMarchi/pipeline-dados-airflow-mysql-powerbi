@@ -20,11 +20,7 @@ O resultado final do pipeline é um dashboard interativo no Power BI que permite
 
 O fluxo de dados segue a seguinte arquitetura:
 
-```
-[Fontes de Dados] ---> [Extração & Carga (ELT)] ---> [Armazenamento] ---> [Visualização]
-      |                           |                        |                    |
-[APIs Públicas] ---> [Airflow (Python/Pandas)] ---> [MySQL (Docker)] ---> [Power BI]
-```
+![Architecture Screenshot](https://github.com/ThiagoMarchi/pipeline_airflow_mysql_powerbi/blob/main/architecture.png)
 
 ---
 
