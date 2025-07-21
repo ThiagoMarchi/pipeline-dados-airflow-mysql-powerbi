@@ -83,17 +83,17 @@ Siga os passos abaixo para recriar e executar este ambiente.
 2.  **Ajustar Permissões de Pastas**
 
 O Airflow no Docker precisa de permissões de escrita nas pastas de logs e plugins.
-    ```bash
+```bash
     sudo mkdir -p ./logs ./plugins
     sudo chown -R 50000:0 ./logs ./plugins
-    ```
+```
 
 3.  **Construir e Iniciar os Contêineres**
 
 Este comando irá construir a imagem customizada do Airflow (com `Faker` instalado) e iniciar todos os serviços (Airflow, MySQL, Redis).
-    ```bash
+```bash
     docker-compose up -d --build
-    ```
+```
     Aguarde alguns minutos para que todos os serviços estejam no ar.
 
 4.  **Configurar a Conexão no Airflow**
