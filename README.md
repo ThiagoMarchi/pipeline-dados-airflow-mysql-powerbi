@@ -10,7 +10,7 @@ O projeto foi totalmente containerizado com Docker e orquestrado com Apache Airf
 
 ## 📄 Dashboard Final
 
-O resultado final do pipeline é um dashboard interativo no Power BI que permite a análise de vendas de veículos por diversas dimensões.
+O resultado final do pipeline é um dashboard interativo no Power BI que permite a análise de vendas de veículos por diversas dimensões. O layout foi prototipado no Figma para garantir uma experiência de usuário clara e eficaz.
 
 ![Dashboard Screenshot](https://github.com/ThiagoMarchi/pipeline_airflow_mysql_powerbi/blob/main/dashboard.png)
 
@@ -31,6 +31,7 @@ O fluxo de dados segue a seguinte arquitetura:
 * **Banco de Dados:** MySQL 8.0
 * **Linguagem Principal:** Python 3.12
 * **Bibliotecas Python:** Pandas, SQLAlchemy, Requests, Faker
+* **Design & Prototipagem: Figma
 * **Ferramenta de BI:** Microsoft Power BI
 * **Ambiente de Desenvolvimento:** WSL 2 (Ubuntu)
 
